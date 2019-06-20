@@ -18,5 +18,6 @@
       "matches": ["https://internshala.com/internships/*"],
       "js": ["myContentScript.bundle.js"]
     }
-  ]
+  ],
+  "permissions": ["tabs"]
 }

@@ -34,7 +34,7 @@ export async function getInternshipCards() {
   const elementsArr = $(".individual_internship").slice(1);
 
   for (const element of elementsArr) {
-    await wait({ millseconds: 200 });
+    await wait({ millseconds: 100 });
     const id = $(element).attr("internshipid");
     const detailsPageURL = $(element).find(".view_detail_button")[0].href;
     const skills = await getSkills(detailsPageURL);
