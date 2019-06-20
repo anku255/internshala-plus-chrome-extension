@@ -31,7 +31,8 @@ export async function getSkills(url) {
 
 export async function getInternshipCards() {
   const cards = [];
-  const elementsArr = $(".individual_internship").slice(1);
+  // TODO: Change afer DEV
+  const elementsArr = $(".individual_internship").slice(1, 5);
 
   for (const element of elementsArr) {
     await wait({ millseconds: 100 });
@@ -39,14 +40,14 @@ export async function getInternshipCards() {
     const detailsPageURL = $(element).find(".view_detail_button")[0].href;
     const skills = await getSkills(detailsPageURL);
 
-    cards.push({ id, card: element, detailsPageURL, skills });
+    cards.push({ id, element, detailsPageURL, skills });
   }
 
   return cards;
 }
 
-export function addSkillsToCard({ card, skills }) {
-  const detailsSection = $(card).find(".individual_internship_details")[0];
+export function addSkillsToCard({ element, skills }) {
+  const detailsSection = $(element).find(".individual_internship_details")[0];
   const { innerHTML } = detailsSection;
 
   detailsSection.innerHTML = `<p>Skills Required: <span>${skills}</span></p> ${innerHTML}`;

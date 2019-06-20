@@ -1,12 +1,33 @@
+import $ from "./lib/jquery.min";
 import { getInternshipCards, addSkillsToCard } from "./utils";
 import { messageType, senderType } from "./constants";
 
 // Chrome Event Listeners
 chrome.runtime.onMessage.addListener(gotMessage);
 
-function gotMessage(message, sender, sendResponse) {
-  const text = message.text;
-  console.log("text", text);
+// Global Variables
+let internshipCards = [];
+
+function gotMessage(msg, sender, sendResponse) {
+  console.log("message recieved", msg);
+
+  if (msg.from === senderType.POPUP && msg.type === messageType.FILTER_CARDS) {
+    const { filterText } = msg;
+
+    for (const card of internshipCards) {
+      const { element } = card;
+
+      const html = $(element)
+        .html()
+        .toLowerCase();
+
+      if (html.includes(filterText)) {
+        $(element).show();
+      } else {
+        $(element).hide();
+      }
+    }
+  }
 }
 
 function setLoadingFalse() {
@@ -17,7 +38,7 @@ function setLoadingFalse() {
 }
 
 async function init() {
-  const internshipCards = await getInternshipCards();
+  internshipCards = await getInternshipCards();
 
   for (const card of internshipCards) {
     addSkillsToCard(card);
