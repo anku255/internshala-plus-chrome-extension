@@ -23,11 +23,6 @@ body {
   min-height: 30rem;
 }
 
-.loader {
-  text-align: center;
-  font-size: 1.6rem;
-}
-
 #filter-form {
   font-size: 1.6rem;
 }

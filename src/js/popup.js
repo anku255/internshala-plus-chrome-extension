@@ -2,14 +2,6 @@ import "../css/popup.css";
 import $ from "./lib/jquery.min";
 import { messageType, senderType } from "./constants";
 
-function disableForm() {
-  $("#filter-form :input").prop("disabled", true);
-}
-
-function enableForm() {
-  $("#filter-form :input").prop("disabled", false);
-}
-
 function handleFilter(e) {
   e.preventDefault();
   const filterText = $("#filter-text").val();
@@ -24,17 +16,7 @@ function handleFilter(e) {
   });
 }
 
-function gotMessage(msg, sender, sendResponse) {
-  if (
-    msg.from === senderType.CONTENT &&
-    msg.type === messageType.SKILLS_LOADED
-  ) {
-    const loader = document.querySelector(".loader");
-    loader.innerHTML = "Skills Loaded";
-
-    enableForm();
-  }
-}
+function gotMessage(msg, sender, sendResponse) {}
 
 window.addEventListener("DOMContentLoaded", () => {
   chrome.runtime.onMessage.addListener(gotMessage);
