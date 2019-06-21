@@ -1,5 +1,5 @@
 import $ from "./lib/jquery.min";
-import { getInternshipCards, addSkillsToCard } from "./utils";
+import { getInternshipCards, addPropertiesToCard } from "./utils";
 import { messageType, senderType } from "./constants";
 
 // Chrome Event Listeners
@@ -41,7 +41,7 @@ async function init() {
   internshipCards = await getInternshipCards();
 
   for (const card of internshipCards) {
-    addSkillsToCard(card);
+    addPropertiesToCard(card);
   }
   setLoadingFalse();
 }

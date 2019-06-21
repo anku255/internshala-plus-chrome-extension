@@ -16,7 +16,7 @@ function handleFilter(e) {
   });
 }
 
-function gotMessage(msg, sender, sendResponse) {}
+function gotMessage(msg, sender, sendResponse) { }
 
 window.addEventListener("DOMContentLoaded", () => {
   chrome.runtime.onMessage.addListener(gotMessage);

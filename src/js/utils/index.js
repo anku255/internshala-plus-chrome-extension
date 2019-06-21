@@ -16,23 +16,40 @@ export async function fetchHTML(url) {
   }
 }
 
-export async function getSkills(url) {
+function getSkills(html) {
+  let re = /<span id="skillNames">(.*)<\/span>/i;
+  if (re.exec(html)) {
+    return re.exec(html)[1];
+  }
+  return "No skills found";
+}
+
+function getNoOfInternships(html) {
+  let re = /<span id="number_of_internships_available".*>(.*)<\/span>/i;
+  if (re.exec(html)) {
+    return re.exec(html)[1];
+  }
+  return "No data found";
+}
+
+export async function getProperties(url) {
+  let properties = {};
   try {
     const html = await fetchHTML(url);
-    let re = /<span id="skillNames">(.*)<\/span>/i;
-    if (re.exec(html)) {
-      return re.exec(html)[1];
-    }
-    return "No skills found";
+    properties.skills = getSkills(html);
+    properties.noOfInternships = getNoOfInternships(html);
   } catch (err) {
-    return "Failed to load";
+    properties.skills = "Failed to load";
+    properties.noOfInternships = "Failed to load";
   }
+  return properties;
 }
+
 
 export async function getInternshipCards() {
   const cards = [];
   // TODO: Change afer DEV
-  const elementsArr = $(".individual_internship").slice(1);
+  const elementsArr = $(".individual_internship").slice(1, 5);
   const headingHTML = getHeadingHTML();
   let index = 0;
 
@@ -42,9 +59,9 @@ export async function getInternshipCards() {
     await wait({ millseconds: 100 });
     const id = $(element).attr("internshipid");
     const detailsPageURL = $(element).find(".view_detail_button")[0].href;
-    const skills = await getSkills(detailsPageURL);
+    const properties = await getProperties(detailsPageURL);
 
-    cards.push({ id, element, detailsPageURL, skills });
+    cards.push({ id, element, detailsPageURL, ...properties });
     showLoadingText(headingHTML, percent);
   }
 
@@ -53,11 +70,13 @@ export async function getInternshipCards() {
   return cards;
 }
 
-export function addSkillsToCard({ element, skills }) {
+export function addPropertiesToCard({ element, skills, noOfInternships }) {
   const detailsSection = $(element).find(".individual_internship_details")[0];
   const { innerHTML } = detailsSection;
 
-  detailsSection.innerHTML = `<p>Skills Required: <span>${skills}</span></p> ${innerHTML}`;
+  detailsSection.innerHTML = `<p>Skills Required: <span>${skills}</span></p>
+    <p># of Internships available: <span>${noOfInternships}</span></p>
+    ${innerHTML}`;
 }
 
 export function getHeadingHTML() {
