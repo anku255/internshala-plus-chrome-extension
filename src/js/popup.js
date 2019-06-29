@@ -16,6 +16,15 @@ function setFilterTextValue() {
     $("#search-field").val(data.filterText);
   });
 }
+function setSelectFieldValue() {
+  getFromStorage("sortBy", data => {
+    $(".sort-by-field .sort-by-select").val(data.sortBy);
+  });
+
+  getFromStorage("orderBy", data => {
+    $(".sort-by-field .order-by-select").val(data.orderBy);
+  });
+}
 
 function handleFilter(e) {
   e.preventDefault();
@@ -32,11 +41,31 @@ function handleFilter(e) {
   });
 }
 
+function handleSelectChange() {
+  let sortBy = $(".sort-by-field .sort-by-select")
+    .children("option:selected")
+    .val();
+
+  let orderBy = $(".sort-by-field .order-by-select")
+    .children("option:selected")
+    .val();
+
+  sortBy = sortBy ? sortBy : "noOfInternships"; // Sort By noOfInternships if not selected
+  orderBy = orderBy ? orderBy : "desc"; // Order by descening if not selected
+
+  saveToStorage("sortBy", sortBy);
+  saveToStorage("orderBy", orderBy);
+  // send message to content url to sort the internship cards
+}
+
 function gotMessage(msg, sender, sendResponse) {}
 
 window.addEventListener("DOMContentLoaded", () => {
   chrome.runtime.onMessage.addListener(gotMessage);
   setFilterTextValue();
+  setSelectFieldValue();
 
   $("#search-field").on("input", handleFilter);
+
+  $(".sort-by-field select").change(handleSelectChange);
 });
