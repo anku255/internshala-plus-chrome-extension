@@ -19,10 +19,39 @@ body {
 }
 
 .container {
-  min-width: 40rem;
+  min-width: 45rem;
   min-height: 30rem;
+  padding: 2rem;
 }
 
 #filter-form {
   font-size: 1.6rem;
+}
+
+.input {
+  font-size: 1.4rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+/*  Search field */
+.field.search {
+  display: flex;
+  justify-content: space-between;
+}
+.field.search label {
+  margin-right: 1rem;
+}
+
+.field.search .control {
+  flex-grow: 1;
+}
+
+/* Sort by field */
+.sort-by-field {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
 }

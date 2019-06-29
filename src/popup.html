@@ -4,12 +4,42 @@
     <meta charset="UTF-8" />
     <title>Internshala Companion</title>
   </head>
+
   <body>
     <div class="container">
       <form action="#" id="filter-form">
-        <label for="filter-text">Filter Skills:</label>
-        <input type="text" name="filter-text" id="filter-text" />
-        <button class="filter-btn">Filter</button>
+        <fieldset>
+          <!-- Search Bar -->
+          <div class="field search">
+            <label for="search-field">Search</label>
+            <div class="control">
+              <input
+                class="input is-primary"
+                type="text"
+                placeholder="Search..."
+                id="search-field"
+                name="search-field"
+              />
+            </div>
+          </div>
+
+          <!-- SORT BY FIELD -->
+          <div class="sort-by-field">
+            <label>Sort By</label>
+            <div class="select">
+              <select>
+                <option>No Of Internships</option>
+                <option>Stipend</option>
+              </select>
+            </div>
+            <div class="select">
+              <select>
+                <option>Descending</option>
+                <option>Ascending</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
       </form>
     </div>
   </body>
