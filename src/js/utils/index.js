@@ -45,7 +45,6 @@ export async function getProperties(url) {
   return properties;
 }
 
-
 export async function getInternshipCards() {
   const cards = [];
   // TODO: Change afer DEV

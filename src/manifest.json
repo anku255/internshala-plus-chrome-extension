@@ -19,5 +19,5 @@
       "js": ["myContentScript.bundle.js"]
     }
   ],
-  "permissions": ["tabs"]
+  "permissions": ["tabs", "storage"]
 }

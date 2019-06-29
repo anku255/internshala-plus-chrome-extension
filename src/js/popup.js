@@ -1,10 +1,26 @@
+import "../css/bulma.min.css";
 import "../css/popup.css";
 import $ from "./lib/jquery.min";
 import { messageType, senderType } from "./constants";
 
+function saveToStorage(key, value) {
+  chrome.storage.local.set({ [key]: value }, function() {});
+}
+
+function getFromStorage(key, cb) {
+  chrome.storage.local.get([key], cb);
+}
+
+function setFilterTextValue() {
+  getFromStorage("filterText", data => {
+    $("#search-field").val(data.filterText);
+  });
+}
+
 function handleFilter(e) {
   e.preventDefault();
-  const filterText = $("#filter-text").val();
+  const filterText = $("#search-field").val();
+  saveToStorage("filterText", filterText);
 
   // ...query for the active tab...
   chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
@@ -16,11 +32,11 @@ function handleFilter(e) {
   });
 }
 
-function gotMessage(msg, sender, sendResponse) { }
+function gotMessage(msg, sender, sendResponse) {}
 
 window.addEventListener("DOMContentLoaded", () => {
   chrome.runtime.onMessage.addListener(gotMessage);
+  setFilterTextValue();
 
-  $("#filter-form").submit(handleFilter);
-  $("#filter-text").on("input", handleFilter);
+  $("#search-field").on("input", handleFilter);
 });
