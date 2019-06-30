@@ -55,7 +55,16 @@ function handleSelectChange() {
 
   saveToStorage("sortBy", sortBy);
   saveToStorage("orderBy", orderBy);
-  // send message to content url to sort the internship cards
+
+  // ...query for the active tab...
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+    chrome.tabs.sendMessage(tabs[0].id, {
+      from: senderType.POPUP,
+      type: messageType.SORT_CARDS,
+      orderBy,
+      sortBy
+    });
+  });
 }
 
 function gotMessage(msg, sender, sendResponse) {}

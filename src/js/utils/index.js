@@ -48,7 +48,7 @@ export async function getProperties(url) {
 export async function getInternshipCards() {
   const cards = [];
   // TODO: Change afer DEV
-  const elementsArr = $(".individual_internship").slice(1, 5);
+  const elementsArr = $(".individual_internship").slice(1);
   const headingHTML = getHeadingHTML();
   let index = 0;
 
