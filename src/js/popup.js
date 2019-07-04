@@ -11,13 +11,17 @@ function getFromStorage(key, cb) {
   chrome.storage.local.get([key], cb);
 }
 
+function sendMessageToContent(messageParams) {
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+    chrome.tabs.sendMessage(tabs[0].id, messageParams);
+  });
+}
+
 function reloadSkills() {
   // ...query for the active tab...
-  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    chrome.tabs.sendMessage(tabs[0].id, {
-      from: senderType.POPUP,
-      type: messageType.RELOAD_SKILLS
-    });
+  sendMessageToContent({
+    from: senderType.POPUP,
+    type: messageType.RELOAD_SKILLS
   });
 }
 
@@ -40,14 +44,10 @@ function handleFilter(e) {
   e.preventDefault();
   const filterText = $("#search-field").val();
   saveToStorage("filterText", filterText);
-
-  // ...query for the active tab...
-  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    chrome.tabs.sendMessage(tabs[0].id, {
-      from: senderType.POPUP,
-      type: messageType.FILTER_CARDS,
-      filterText: filterText.toLowerCase()
-    });
+  sendMessageToContent({
+    from: senderType.POPUP,
+    type: messageType.FILTER_CARDS,
+    filterText: filterText.toLowerCase()
   });
 }
 
@@ -66,14 +66,11 @@ function handleSelectChange() {
   saveToStorage("sortBy", sortBy);
   saveToStorage("orderBy", orderBy);
 
-  // ...query for the active tab...
-  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    chrome.tabs.sendMessage(tabs[0].id, {
-      from: senderType.POPUP,
-      type: messageType.SORT_CARDS,
-      orderBy,
-      sortBy
-    });
+  sendMessageToContent({
+    from: senderType.POPUP,
+    type: messageType.SORT_CARDS,
+    orderBy,
+    sortBy
   });
 }
 
