@@ -19,7 +19,7 @@ body {
 }
 
 .container {
-  min-width: 45rem;
+  min-width: 48rem;
   min-height: 30rem;
   padding: 2rem;
 }
@@ -54,4 +54,9 @@ label {
   margin-top: 1rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.sort-by-field button {
+  margin-left: 0.8rem;
 }

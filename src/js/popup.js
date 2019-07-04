@@ -77,4 +77,6 @@ window.addEventListener("DOMContentLoaded", () => {
   $("#search-field").on("input", handleFilter);
 
   $(".sort-by-field select").change(handleSelectChange);
+
+  $("button#sort-btn").click(handleSelectChange);
 });
