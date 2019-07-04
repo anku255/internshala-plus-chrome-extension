@@ -78,6 +78,10 @@ function gotMessage(msg, sender, sendResponse) {
     const { sortBy, orderBy } = msg;
     sortCards(sortBy, orderBy);
   }
+
+  if (msg.from === senderType.POPUP && msg.type === messageType.RELOAD_SKILLS) {
+    init();
+  }
 }
 
 function setLoadingFalse() {

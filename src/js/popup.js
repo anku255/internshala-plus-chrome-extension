@@ -11,6 +11,16 @@ function getFromStorage(key, cb) {
   chrome.storage.local.get([key], cb);
 }
 
+function reloadSkills() {
+  // ...query for the active tab...
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+    chrome.tabs.sendMessage(tabs[0].id, {
+      from: senderType.POPUP,
+      type: messageType.RELOAD_SKILLS
+    });
+  });
+}
+
 function setFilterTextValue() {
   getFromStorage("filterText", data => {
     $("#search-field").val(data.filterText);
@@ -79,4 +89,6 @@ window.addEventListener("DOMContentLoaded", () => {
   $(".sort-by-field select").change(handleSelectChange);
 
   $("button#sort-btn").click(handleSelectChange);
+
+  $("button#load-skills-btn").click(reloadSkills);
 });
