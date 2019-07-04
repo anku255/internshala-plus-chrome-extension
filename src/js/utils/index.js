@@ -32,12 +32,32 @@ function getNoOfInternships(html) {
   return "No data found";
 }
 
+function parseStipendString(stipend) {
+  return stipend
+    .replace(/[^0-9-]/gi, "") // replace all non digit except "-" by ""
+    .split("-") // split by "-"
+    .map(parseFloat) // parse the number from string
+    .filter(val => !isNaN(val)) // filter for NaN
+    .sort((a, b) => a - b) // sort by desc order
+    .pop(); // get the largest (first) element
+}
+
+function getStipend(html) {
+  let re = /<\/h5>INR(.*) \/.*<br>/i;
+
+  if (re.exec(html)) {
+    return parseStipendString(re.exec(html)[1]);
+  }
+  return "No data found";
+}
+
 export async function getProperties(url) {
   let properties = {};
   try {
     const html = await fetchHTML(url);
     properties.skills = getSkills(html);
     properties.noOfInternships = getNoOfInternships(html);
+    properties.stipend = getStipend(html);
   } catch (err) {
     properties.skills = "Failed to load";
     properties.noOfInternships = "Failed to load";
