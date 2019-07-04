@@ -67,8 +67,7 @@ export async function getProperties(url) {
 
 export async function getInternshipCards() {
   const cards = [];
-  // TODO: Change afer DEV
-  const elementsArr = $(".individual_internship").slice(1);
+  const elementsArr = $(".individual_internship");
   const headingHTML = getHeadingHTML();
   let index = 0;
 
@@ -113,7 +112,7 @@ export function showLoadingText(html, percent) {
                       font-size: 1.6rem;
                       color: #1295c9;"
               >
-                Loading Skills ${percent}%
+                Loading ${percent}%
               </div>`
   );
 }

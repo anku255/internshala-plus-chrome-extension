@@ -30,8 +30,6 @@ function sortCards(sortBy, orderBy) {
 
   $(".individual_internship").css({ "min-width": "600px" });
 
-  console.log("sortBy", sortBy, orderBy);
-
   let sortedCards = [];
   switch (sortBy) {
     case "noOfInternships":
