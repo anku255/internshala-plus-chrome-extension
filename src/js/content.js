@@ -25,11 +25,12 @@ function filterCards(filterText) {
 }
 
 function sortCards(sortBy, orderBy) {
-  console.log("sorting cards", sortBy, orderBy);
   $("#internship_list_container").css({ display: "flex", "flex-wrap": "wrap" });
   $("#internship_list_container nav").css({ order: 999, margin: "0 auto" });
 
   $(".individual_internship").css({ "min-width": "600px" });
+
+  console.log("sortBy", sortBy, orderBy);
 
   let sortedCards = [];
   switch (sortBy) {
@@ -41,6 +42,16 @@ function sortCards(sortBy, orderBy) {
       } else {
         sortedCards = [...internshipCards].sort(
           (card1, card2) => card1.noOfInternships - card2.noOfInternships
+        );
+      }
+    case "stipend":
+      if (orderBy === "desc") {
+        sortedCards = [...internshipCards].sort(
+          (card1, card2) => card2.stipend - card1.stipend
+        );
+      } else {
+        sortedCards = [...internshipCards].sort(
+          (card1, card2) => card1.stipend - card2.stipend
         );
       }
       break;
