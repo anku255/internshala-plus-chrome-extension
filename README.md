@@ -11,3 +11,13 @@ Internshala Plus extension allows you to -
 ## Installation
 
 TODO: [Add chrome web store link here]
+
+## Screenshots
+
+![screenshot 2](https://github.com/anku255/internshala-plus-chrome-extension/blob/master/screenshots/2.png)
+</br>
+
+![screenshot 3](https://github.com/anku255/internshala-plus-chrome-extension/blob/master/screenshots/3.png)
+</br>
+
+![screenshot 4](https://github.com/anku255/internshala-plus-chrome-extension/blob/master/screenshots/4.png)
