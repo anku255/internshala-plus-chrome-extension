@@ -10,7 +10,7 @@ Internshala Plus extension allows you to -
 
 ## Installation
 
-TODO: [Add chrome web store link here]
+Install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/internshala-plus/einngbgomhimnjgbdoejfdoccahlnajf).
 
 ## Screenshots
 
