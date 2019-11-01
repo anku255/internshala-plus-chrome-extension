@@ -25,7 +25,7 @@ function getSkills(html) {
 }
 
 function getNoOfInternships(html) {
-  let re = /<span id="number_of_internships_available".*>(.*)<\/span>/i;
+  let re = /<span id="number_of_internships_available"[\s\S]*?>[\s\S]*?(\d)<\/span>/i;
   if (re.exec(html)) {
     return re.exec(html)[1];
   }

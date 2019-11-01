@@ -1,6 +1,6 @@
 {
   "name": "internshala-plus-chrome-extension",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A chrome extension for internshala.com",
   "scripts": {
     "build": "node utils/build.js",
@@ -16,8 +16,8 @@
     "html-webpack-plugin": "3.2.0",
     "style-loader": "^0.23.1",
     "webpack": "4.28.4",
+    "webpack-cli": "^3.3.10",
     "webpack-dev-server": "3.1.14",
-    "write-file-webpack-plugin": "4.5.0",
-    "webpack-cli": "^3.2.1"
+    "write-file-webpack-plugin": "4.5.0"
   }
 }
